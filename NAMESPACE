@@ -36,24 +36,25 @@ is.Monomorphic,
 sortSNPs,
 related,
 # From haplo.stats package
-dglm.fit,
+#..# dglm.fit,
 Ginv,
 make.geno,
-haplo.binomial,
+#..# haplo.binomial,
 haplo.em,
 haplo.interaction,
 haplo.glm,
 haplo.glm.control,
 haplo.model.frame,
 haplo.score,
-haplo.score.glm,
+# haplo.score.glm,
 haplo.score.slide,
 louis.info,
-mf.gindx,
+# mf.gindx,
 printBanner,
-residScaledGlmFit,
-score.sim.control,
-varfunc.glm.fit
+# cresidScaledGlmFit,
+setupGeno,
+score.sim.control
+# varfunc.glm.fit
 )
 
 # import("haplo.stats")
@@ -65,6 +66,7 @@ importFrom("poisbinom", "dpoisbinom" )
 importFrom("parallel", "mclapply")
 importFrom("plyr", "arrange", "count")
 importFrom("grDevices", "heat.colors")
+importFrom("rms", "lrm")
 # importFrom("Biostrings", "getSeq", "DNA_BASES")
 importFrom("graphics", "abline", "axis", "barplot", "hist", "image",
            "layout", "legend", "lines", "matplot", "par", "segments",
@@ -77,6 +79,8 @@ importFrom("stats", ".getXlevels", "AIC", "anova", "as.formula",
                "na.omit", "nlm", "optimize", "pchisq", "pnorm",
                "printCoefmat", "qbeta", "qchisq", "qnorm", "relevel",
                "runif", "sd", "terms", "reorder")
+importFrom("stats", "dnorm", "dpois", "var", "weights")
+importFrom("methods", "existsFunction")
 
 
 S3method(summary,haplo.glm)

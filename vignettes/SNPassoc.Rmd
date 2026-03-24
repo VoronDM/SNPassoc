@@ -329,7 +329,7 @@ The only unequivocal method of resolving phase ambiguity is sequencing the chrom
 We now illustrate how to perform haplotype estimation from genotype data using the EM algorithm and how to integrate haplotype uncertainty when evaluating the association between traits and haplotypes. Haplotype inference is performed with `haplo.stats`, for which genotypes are encoded in a different format.  *make.geno*, from `SNPassoc`, formats data for `haplo.stats`. The function *haplo.em* computes the haplotype frequency in the data for the SNPs of interest. Here we illustrate how to estimate haplotypes built from the SNPs rs714588, rs1023555 and rs898070: 
 
 ```{r haplo_em}
-library(haplo.stats)
+# library(haplo.stats)
 snpsH <- c("rs714588", "rs1023555",  "rs898070")
 genoH <- make.geno(asthma.s, snpsH)
 em <- haplo.em(genoH, locus.label = snpsH, miss.val = c(0, NA))

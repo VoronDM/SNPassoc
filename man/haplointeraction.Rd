@@ -53,7 +53,6 @@ haplo.interaction(formula, data, SNPs.sel, quantitative =
 \examples{
 # not Run
 library(SNPassoc)
-library(haplo.stats)
 
 data(SNPs)
 datSNP<-setupSNP(SNPs,6:40,sep="")

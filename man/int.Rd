@@ -29,7 +29,6 @@ A factor variable.
 \examples{
 
 library(SNPassoc)
-library(haplo.stats)
 
 data(SNPs)
 datSNP<-setupSNP(SNPs, 6:40, sep = "")

@@ -21,9 +21,8 @@ intervals(o, level=.95, ...)
 \value{ intervals object with ORs and 95\% confidence intervals for an object of class 'haplo.glm'}
 
 \examples{
-# Not Run
+
 library(SNPassoc)
-library(haplo.stats)
 
 data(asthma, package = "SNPassoc")
 
@@ -32,11 +31,11 @@ trait <- asthma.s$casecontrol
 snpsH <- c("rs714588", "rs1023555",  "rs898070")
 genoH <- make.geno(asthma.s, snpsH)
 
-mod <- haplo.stats:: haplo.glm( trait ~ genoH,           
-                                family="binomial", 
-                                locus.label=snpsH,
-                                allele.lev=attributes(genoH)$unique.alleles,
-                                control = haplo.glm.control(haplo.freq.min=0.05))   
+mod <- haplo.glm( trait ~ genoH,
+                  family="binomial", 
+                  locus.label=snpsH,
+                  allele.lev=attributes(genoH)$unique.alleles,
+                  control = haplo.glm.control(haplo.freq.min=0.05))   
 intervals(mod)
 summary(mod)
 

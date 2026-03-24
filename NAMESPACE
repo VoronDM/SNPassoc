@@ -1,3 +1,4 @@
+useDynLib(SNPassoc, .registration = TRUE)
 export(
 snp,
 setupSNP,
@@ -19,12 +20,11 @@ pvalues,
 intervals,
 int, 
 interactionPval,
-make.geno,
-haplo.interaction,
 permTest,
 qqpval,
 GenomicControl,
 maxstat,
+na.geno.keep,
 LD,
 LDplot,
 LDtable,
@@ -34,10 +34,30 @@ Table.N.Per,
 Table.mean.se,
 is.Monomorphic,
 sortSNPs,
-related
+related,
+# From haplo.stats package
+#..# dglm.fit,
+Ginv,
+make.geno,
+#..# haplo.binomial,
+haplo.em,
+haplo.interaction,
+haplo.glm,
+haplo.glm.control,
+haplo.model.frame,
+haplo.score,
+# haplo.score.glm,
+haplo.score.slide,
+louis.info,
+# mf.gindx,
+printBanner,
+# cresidScaledGlmFit,
+setupGeno,
+score.sim.control
+# varfunc.glm.fit
 )
 
-import("haplo.stats")
+# import("haplo.stats")
 import("survival")
 import("mvtnorm")
 import("ggplot2")
@@ -46,6 +66,7 @@ importFrom("poisbinom", "dpoisbinom" )
 importFrom("parallel", "mclapply")
 importFrom("plyr", "arrange", "count")
 importFrom("grDevices", "heat.colors")
+importFrom("rms", "lrm")
 # importFrom("Biostrings", "getSeq", "DNA_BASES")
 importFrom("graphics", "abline", "axis", "barplot", "hist", "image",
            "layout", "legend", "lines", "matplot", "par", "segments",
@@ -58,6 +79,8 @@ importFrom("stats", ".getXlevels", "AIC", "anova", "as.formula",
                "na.omit", "nlm", "optimize", "pchisq", "pnorm",
                "printCoefmat", "qbeta", "qchisq", "qnorm", "relevel",
                "runif", "sd", "terms", "reorder")
+importFrom("stats", "dnorm", "dpois", "var", "weights")
+importFrom("methods", "existsFunction")
 
 
 S3method(summary,haplo.glm)
@@ -88,7 +111,6 @@ S3method(print,snp)
 S3method("[",snp)
 
 S3method(print,summary.snp)
-
 
 S3method(plot,SNPinteraction)
 S3method(print,SNPinteraction)
@@ -132,6 +154,13 @@ S3method(print,LD)
 S3method(print,LD.data.frame)
 S3method(summary,LD.data.frame)
 S3method(print,summary.LD.data.frame)
+
+
+# methods imported from haplo.stats package
+S3method(print, haplo.em)
+S3method(plot, haplo.score)
+S3method(plot, haplo.score.slide)
+
 
 ##################
 # hidden functions

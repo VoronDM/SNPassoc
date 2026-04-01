@@ -9,3 +9,4 @@ memcheck.R
 ^docs$
 ^pkgdown$
 ^\.github$
+^SNPassoc\.Rproj$

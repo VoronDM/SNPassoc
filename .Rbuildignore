@@ -10,3 +10,5 @@ memcheck.R
 ^pkgdown$
 ^\.github$
 ^SNPassoc\.Rproj$
+^README\.Rmd$
+^codecov\.yml$

@@ -1,3 +1,3 @@
+#' @export
 `pvalues.WGassociation` <-
-function(x) attr(x,"pvalues")
-
+  function(x) attr(x, "pvalues")

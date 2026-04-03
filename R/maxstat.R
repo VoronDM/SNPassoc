@@ -1,2 +1,3 @@
-maxstat<-function(x,...)
- UseMethod("maxstat")
+maxstat <- function(x, ...) {
+  UseMethod("maxstat")
+}

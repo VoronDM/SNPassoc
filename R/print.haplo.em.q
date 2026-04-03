@@ -61,29 +61,30 @@
 # email: schaid@mayo.edu
 #
 
-print.haplo.em <- function(x, digits=max(options()$digits-2, 5), nlines=NULL, ...){
+#' @export
+print.haplo.em <- function(x, digits=max(options()$digits - 2, 5), nlines=NULL, ...){
 
   printBanner("Haplotypes")
   df <- data.frame(x$haplotype,round(x$hap.prob,digits))
   names(df) <- c(x$locus.label, "hap.freq")
-  if(is.null(nlines)) print(df)
+  if (is.null(nlines)) print(df)
   else print(df[1:nlines,])
   invisible()
 
-  if(x$converge==0)
+  if (x$converge == 0)
      warning("EM failed to converge")
 
   printBanner("Details")
 
   pval <- NA
-  if(x$df.lr > 0) {
-    pval = pchisq(x$lr, x$df.lr, lower.tail=FALSE)
+  if (x$df.lr > 0) {
+    pval = pchisq(x$lr, x$df.lr, lower.tail = FALSE)
   }
     
   cat("lnlike = ",round(x$lnlike,digits),"\n")
   cat("lr stat for no LD = ",round(x$lr,digits),", df = ",x$df.lr,", p-val = ",round(pval,digits),"\n")
 
-  if(length(x$rows.rem > 0)) {
+  if (length(x$rows.rem > 0)) {
      cat("\nResults may be incomplete because one or more subjects was removed\n")
    }
 

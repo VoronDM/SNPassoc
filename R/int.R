@@ -1,6 +1,4 @@
 `int` <-
-function(x)
- {
-  x
- }
-
+  function(x) {
+    x
+  }

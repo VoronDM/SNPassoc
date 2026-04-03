@@ -1,6 +1,4 @@
 `as.snp` <-
-function (x, ...) 
- {
-   if (is.snp(x)) x else snp(x, ...)
- }
-
+  function(x, ...) {
+    if (is.snp(x)) x else snp(x, ...)
+  }

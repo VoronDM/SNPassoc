@@ -3,15 +3,16 @@ Version: 2.3.0.9000
 Date: 2026-03-23
 Depends: R (>= 4.0.0)
 Imports: 
-        mvtnorm, 
-        parallel, 
-        survival, 
-        tidyr, 
-        plyr,
-        ggplot2, 
-        poisbinom,
-        rms,
-        methods
+    mvtnorm,
+    parallel,
+    survival,
+    tidyr,
+    plyr,
+    ggplot2,
+    poisbinom,
+    rms,
+    methods,
+    lifecycle
 Suggests: testthat, knitr, rmarkdown, biomaRt,
         VariantAnnotation, 
         GenomicRanges, IRanges, S4Vectors, org.Hs.eg.db,
@@ -45,3 +46,4 @@ Encoding: UTF-8
 VignetteBuilder: knitr
 RoxygenNote: 7.3.3
 NeedsCompilation: no
+Roxygen: list(markdown = TRUE)

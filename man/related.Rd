@@ -16,7 +16,7 @@ A matrix with related individuals.
 Get related samples
 }
 \examples{
-  library(SNPassoc)
-  data(SNPs)
+library(SNPassoc)
+data(SNPs)
 
 }

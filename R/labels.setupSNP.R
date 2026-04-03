@@ -1,3 +1,3 @@
+#' @export
 `labels.setupSNP` <-
-function(object, ...) attr(object,"label.SNPs")
-
+  function(object, ...) attr(object, "label.SNPs")

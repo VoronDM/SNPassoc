@@ -1,6 +1,4 @@
 `is.snp` <-
-function(x)
-{
- inherits(x, "snp")
-}
-
+  function(x) {
+    inherits(x, "snp")
+  }

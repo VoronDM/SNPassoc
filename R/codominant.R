@@ -1,3 +1,2 @@
 `codominant` <-
-function(o) UseMethod("codominant")
-
+  function(o) UseMethod("codominant")

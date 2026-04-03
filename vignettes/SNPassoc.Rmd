@@ -23,12 +23,12 @@ vignette: >
 
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(comment="", warning=FALSE, message=FALSE, cache=TRUE)
+knitr::opts_chunk$set(comment = "", warning = FALSE, message = FALSE, cache = TRUE)
 ```
 
 ```{r resetUserConf, echo=FALSE, eval=TRUE}
-oldpar <- par(no.readonly = TRUE)  
-on.exit(par(oldpar))            
+oldpar <- par(no.readonly = TRUE)
+on.exit(par(oldpar))
 ```
 
 # Introduction
@@ -47,7 +47,7 @@ Then, the data is loaded into the R session by
 
 ```{r load_asthma}
 data(asthma, package = "SNPassoc")
-str(asthma, list.len=9)
+str(asthma, list.len = 9)
 asthma[1:5, 1:8]
 ```
 
@@ -60,7 +60,7 @@ To start the analysis, we must indicate which columns of the dataset `asthma` co
 
 ```{r prepare_data} 
 library(SNPassoc)
-asthma.s <- setupSNP(data=asthma, colSNPs=7:ncol(asthma), sep="")
+asthma.s <- setupSNP(data = asthma, colSNPs = 7:ncol(asthma), sep = "")
 ``` 
 
 This is an alternative way of determining the columns containing the SNPs
@@ -68,7 +68,7 @@ This is an alternative way of determining the columns containing the SNPs
 
 ```{r prepare_data2} 
 idx <- grep("^rs", colnames(asthma))
-asthma.s <- setupSNP(data=asthma, colSNPs=idx, sep="")
+asthma.s <- setupSNP(data = asthma, colSNPs = idx, sep = "")
 ``` 
 
 
@@ -94,14 +94,14 @@ plot(asthma.s$rs1422993)
 The argument *type* helps to get a pie chart
 
 ```{r plotsummarySNP2, fig.cap="SNP summary. Pie chart showing the basic information of a given SNP"}
-plot(asthma.s$rs1422993, type=pie)
+plot(asthma.s$rs1422993, type = pie)
 ``` 
 
 
 The *summary* function can also be applied to the whole dataset
 
 ```{r descriptive}
-summary(asthma.s, print=FALSE)
+summary(asthma.s, print = FALSE)
 ```
 
 showing the SNP labels with minor/major allele format, the major allele frequency the HWE test and the percentage of missing genotypes. Missing values can be further explored plotting with
@@ -126,10 +126,10 @@ We observe that the first SNPs in the dataset are under HWE since their P-values
 ```{r HWE_controls}
 hwe2 <- tableHWE(asthma.s, casecontrol)
 
-#SNPs is HWE in the whole sample but not controls
-snpNHWE <- hwe2[,1]>0.05 & hwe2[,2]<0.05
+# SNPs is HWE in the whole sample but not controls
+snpNHWE <- hwe2[, 1] > 0.05 & hwe2[, 2] < 0.05
 rownames(hwe2)[snpNHWE]
-hwe2[snpNHWE,]
+hwe2[snpNHWE, ]
 ```
 
 We see that rs1345267 is not in HWE within controls because its P-value is <0.05. Notice that one is interested in keeping those SNPsthat do not reject the null hypothesis. As several SNPs are tested, multiple comparisons must be considered. In this particular setting, a threshold of 0.001 is normally considered. As a quality control measure, it is not necessary to be as conservative as in those situations where false discovery rates need to be controlled. 
@@ -137,9 +137,9 @@ We see that rs1345267 is not in HWE within controls because its P-value is <0.05
 SNPs that do not pass the HWE test must be removed form further analyses. We can recall *setupSNP* and indicate the columns of the SNPs to be kept
 
 ```{r remove_SNPs}
-snps.ok <- rownames(hwe2)[hwe2[,2]>=0.001]
-pos <- which(colnames(asthma)%in%snps.ok, useNames = FALSE)
-asthma.s <- setupSNP(asthma, pos, sep="")
+snps.ok <- rownames(hwe2)[hwe2[, 2] >= 0.001]
+pos <- which(colnames(asthma) %in% snps.ok, useNames = FALSE)
+asthma.s <- setupSNP(asthma, pos, sep = "")
 ```
 
 Note that in the variable *pos* we redefine the SNP variables to be considered as class *snp*.
@@ -164,7 +164,7 @@ maxstat(asthma.s$casecontrol, asthma.s$rs1422993)
 If an expected model of inheritance is hypothesized, the association analysis for the model can be specified in the argument *model*, which by default test all models,
 
 ```{r mode_inheritance}
-association(casecontrol ~ rs1422993, asthma.s, model="dominant")
+association(casecontrol ~ rs1422993, asthma.s, model = "dominant")
 ```
 
 Association tests are typically adjusted by covariates, which are incorporated in the model in the usual form
@@ -182,14 +182,15 @@ association(casecontrol ~ rs1422993 + survival::strata(gender), asthma.s)
 We can see, for instance, that the dominant model is significant only in males. The subset argument allows fitting the model in a subgroup of individuals
 
 ```{r subset}
-association(casecontrol ~ rs1422993, asthma.s, 
-                subset=country=="Spain")
+association(casecontrol ~ rs1422993, asthma.s,
+  subset = country == "Spain"
+)
 ```
 
 These analyses can be also be performed in quantitative traits, such as body mass index, since *association* function automatically selects the error distribution of the regression analysis (either Gaussian or binomial). 
 
 ```{r quantitative}
-association(bmi ~ rs1422993, asthma.s) 
+association(bmi ~ rs1422993, asthma.s)
 ```
 
 For BMI, *association* tests whether the difference between means is statistically significant, rather than computing an OR. 
@@ -197,7 +198,7 @@ For BMI, *association* tests whether the difference between means is statistical
 For multiple SNP data, our objective is to identify the variants that are significantly associated with the trait. The most basic strategy is, therefore, to fit an association test like the one described above for each of the SNPs in the dataset and determine which of those associations are significant. The massive univariate testing is the most widely used analysis method for *omic* data because of its simplicity. In *SNPassoc*, this type of analysis is done with the function *WGassociation* 
 
 ```{r morethan1SNP}
-ans <- WGassociation(casecontrol, data=asthma.s)
+ans <- WGassociation(casecontrol, data = asthma.s)
 head(ans)
 ```
 
@@ -239,8 +240,8 @@ ans.max
 We note that even under the max-statistics none of the SNPs tested is significant under the Bonferroni correction (<0.0001) for multiple SNP testing
 
 ```{r maxBonferroni}
-#minimum P-value across SNPs
-min(ans.max["Pr(>z)",])
+# minimum P-value across SNPs
+min(ans.max["Pr(>z)", ])
 ```
 
 Information for specific association models for given SNPs can also be retrieved with *WGstats* 
@@ -264,16 +265,20 @@ library(xtable)
 out <- getNiceTable(ans[c("rs1422993", "rs184448")])
 
 nlines <- attr(out, "nlines")
-hlines <- c(-1, -1, 0, cumsum(nlines+1), nrow(out), nrow(out))
+hlines <- c(-1, -1, 0, cumsum(nlines + 1), nrow(out), nrow(out))
 
-print(xtable(out, caption='Genetic association using
-                different genetic models from asthma 
-                data example of rs1422993 and rs184448 
-                SNPs obtained with SNPassoc.',
-             label = 'tab-2SNPs'),
-      tabular.enviroment="longtable", file="tableSNPs",
-      floating=FALSE,  include.rownames = FALSE, 
-      hline.after= hlines, sanitize.text.function=identity)
+print(
+  xtable(out,
+    caption = "Genetic association using
+                different genetic models from asthma
+                data example of rs1422993 and rs184448
+                SNPs obtained with SNPassoc.",
+    label = "tab-2SNPs"
+  ),
+  tabular.enviroment = "longtable", file = "tableSNPs",
+  floating = FALSE, include.rownames = FALSE,
+  hline.after = hlines, sanitize.text.function = identity
+)
 ```
 
 
@@ -282,8 +287,9 @@ print(xtable(out, caption='Genetic association using
 Gene-enviroment (GxE) analyses can be performed within `SNPassoc` using *association* function. Assume that we are interested in testing whether the risk of rs1422993 for asthma under the dominant model is different among smokers (variable smoke; 0=never, 1=ever). This code fits a model with an interaction term where the environmental variable is required to be a factor factor variable. 
 
 ```{r snpxsmoke}
-association(casecontrol ~ dominant(rs1422993)*factor(smoke), 
-            data=asthma.s)
+association(casecontrol ~ dominant(rs1422993) * factor(smoke),
+  data = asthma.s
+)
 ``` 
 
 The result is an interaction table showing that the risk of individuals carrying the T allele increases the risk of asthma in never smokers (OR=1.35; CI: 1.02-1.79) while it is not significant in ever smokers (OR=0.95; CI: 0.63-1.42). However, the interaction is not statistically significant ($P$-interaction=0.8513). The output also shows the stratified ORs that can help in interpreting the results. 
@@ -291,8 +297,9 @@ The result is an interaction table showing that the risk of individuals carrying
 In a similar way, gene-gene interaction (GxG) of a given SNP epistasis model can also be fitted using the same function. In that case, the genetic model of the interacting SNP must be indicated in the *model.inteaction* argument.
 
 ```{r snpxsnp}
-association(casecontrol ~ rs1422993*factor(rs184448), 
-            data=asthma.s, model.interaction = "dominant" )
+association(casecontrol ~ rs1422993 * factor(rs184448),
+  data = asthma.s, model.interaction = "dominant"
+)
 ```
 
 We observe that the interaction between these two SNPs is not statistically significant (P-value=0.24). However, the OR of GG genotype of rs184448 differs across individuals between the GG and GT-TT genotypes of rs1422993 (see ORs for GG in the second table of the output).
@@ -300,13 +307,13 @@ We observe that the interaction between these two SNPs is not statistically sign
 The user also can perform GxG for a set of SNPs using this code. Let us assume we are interested in assessing interaction between the SNPs that are significant at 10\% level
 
 ```{r gxg_subset}
-ans <- WGassociation(casecontrol, data=asthma.s)
-mask <- apply(ans, 1, function(x) min(x, na.rm=TRUE)<0.1)
+ans <- WGassociation(casecontrol, data = asthma.s)
+mask <- apply(ans, 1, function(x) min(x, na.rm = TRUE) < 0.1)
 sig.snps <- names(mask[mask])
 sig.snps
-idx <- which(colnames(asthma)%in%sig.snps)
-asthma.s2 <- setupSNP(asthma, colSNPs = idx, sep="")
-ans.int <- interactionPval(casecontrol ~ 1, data=asthma.s2)
+idx <- which(colnames(asthma) %in% sig.snps)
+asthma.s2 <- setupSNP(asthma, colSNPs = idx, sep = "")
+ans.int <- interactionPval(casecontrol ~ 1, data = asthma.s2)
 ans.int
 ```
 
@@ -330,7 +337,7 @@ We now illustrate how to perform haplotype estimation from genotype data using t
 
 ```{r haplo_em}
 # library(haplo.stats)
-snpsH <- c("rs714588", "rs1023555",  "rs898070")
+snpsH <- c("rs714588", "rs1023555", "rs898070")
 genoH <- make.geno(asthma.s, snpsH)
 em <- haplo.em(genoH, locus.label = snpsH, miss.val = c(0, NA))
 em
@@ -344,11 +351,12 @@ We then want to assess if any of these haplotypes significantly associates with 
 
 ```{r hap_assoc}
 trait <- asthma.s$casecontrol
-mod <- haplo.glm(trait ~ genoH,           
-                 family="binomial", 
-                 locus.label=snpsH,
-                 allele.lev=attributes(genoH)$unique.alleles,
-                 control = haplo.glm.control(haplo.freq.min=0.05))   
+mod <- haplo.glm(trait ~ genoH,
+  family = "binomial",
+  locus.label = snpsH,
+  allele.lev = attributes(genoH)$unique.alleles,
+  control = haplo.glm.control(haplo.freq.min = 0.05)
+)
 intervals(mod)
 ```
 
@@ -365,24 +373,27 @@ snpsH2 <- labels(asthma.s)[6:15]
 genoH2 <- make.geno(asthma.s, snpsH2)
 haplo.score <- list()
 for (i in 4:7) {
- trait <- asthma.s$casecontrol
- haplo.score[[i-3]] <- haplo.score.slide(trait, genoH2, 
-                          trait.type="binomial",
-                          n.slide=i,
-                          simulate=TRUE,
-                          sim.control=score.sim.control(min.sim=100,
-                                       max.sim=200)) 
- }
+  trait <- asthma.s$casecontrol
+  haplo.score[[i - 3]] <- haplo.score.slide(trait, genoH2,
+    trait.type = "binomial",
+    n.slide = i,
+    simulate = TRUE,
+    sim.control = score.sim.control(
+      min.sim = 100,
+      max.sim = 200
+    )
+  )
+}
 ```
 
 The results can be visualized with the following plot
 
 ```{r plotSliding, fig.cap="Sliding window approach. Results obtained of varying haplotype size from 4 up to 7 of  6th to the 15th SNP from asthma data example", fig.height=7, fig.width=7}
-par(mfrow=c(2,2))
+par(mfrow = c(2, 2))
 for (i in 4:7) {
-    plot(haplo.score[[i-3]])
-    title(paste("Sliding Window=", i, sep=""))
- }
+  plot(haplo.score[[i - 3]])
+  title(paste("Sliding Window=", i, sep = ""))
+}
 ```
 
 We observe that the highest -log10(P-value) is obtained for a haplotype of 4 SNP length starting at the 4th SNP of the selected SNPs. After deciding the best combination of SNPs, the haplotype association with asthma can be estimated by 
@@ -390,11 +401,12 @@ We observe that the highest -log10(P-value) is obtained for a haplotype of 4 SNP
 ```{r hap_assoc_bestH}
 snpsH3 <- snpsH2[4:7]
 genoH3 <- make.geno(asthma.s, snpsH3)
-mod <- haplo.glm(trait~genoH3,           
-                 family="binomial", 
-                 locus.label=snpsH3,
-                 allele.lev=attributes(genoH3)$unique.alleles,
-                 control = haplo.glm.control(haplo.freq.min=0.05))      
+mod <- haplo.glm(trait ~ genoH3,
+  family = "binomial",
+  locus.label = snpsH3,
+  allele.lev = attributes(genoH3)$unique.alleles,
+  control = haplo.glm.control(haplo.freq.min = 0.05)
+)
 intervals(mod)
 ```
 
@@ -402,22 +414,23 @@ Here, we observe that individuals carrying the haplotype GCAC have a 53\% increa
 
 ```{r lrt_hap}
 lrt <- mod$lrt
-pchisq(lrt$lrt, lrt$df, lower=FALSE)
+pchisq(lrt$lrt, lrt$df, lower = FALSE)
 ```
 
 We can also test the association between asthma and the haplotype  adjusted for smoking status
 
 ```{r lrt_hap_Adj}
 smoke <- asthma.s$smoke
-mod.adj.ref <- glm(trait ~ smoke, family="binomial")
-mod.adj <- haplo.glm(trait ~ genoH3 + smoke ,           
-                 family="binomial", 
-                 locus.label=snpsH3,
-                 allele.lev=attributes(genoH3)$unique.alleles,
-                 control = haplo.glm.control(haplo.freq.min=0.05))
+mod.adj.ref <- glm(trait ~ smoke, family = "binomial")
+mod.adj <- haplo.glm(trait ~ genoH3 + smoke,
+  family = "binomial",
+  locus.label = snpsH3,
+  allele.lev = attributes(genoH3)$unique.alleles,
+  control = haplo.glm.control(haplo.freq.min = 0.05)
+)
 
 lrt.adj <- mod.adj.ref$deviance - mod.adj$deviance
-pchisq(lrt.adj, mod.adj$lrt$df, lower=FALSE)
+pchisq(lrt.adj, mod.adj$lrt$df, lower = FALSE)
 ```
 
 

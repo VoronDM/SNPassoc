@@ -1,6 +1,5 @@
+#' @export
 `overdominant.WGassociation` <-
-function(o)
-{
-  attr(o,"pvalues")[,"overdominant"]
-}
-
+  function(o) {
+    attr(o, "pvalues")[, "overdominant"]
+  }

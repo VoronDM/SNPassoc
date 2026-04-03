@@ -1,5 +1,6 @@
+#' @export
 `[<-.setupSNP` <-
-function(x,i,j,value){
-    out<-NextMethod("[<-")
-    out }
-
+  function(x, i, j, value) {
+    out <- NextMethod("[<-")
+    out
+  }

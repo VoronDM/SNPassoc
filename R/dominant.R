@@ -1,3 +1,2 @@
 `dominant` <-
-function (o) UseMethod("dominant")
-
+  function(o) UseMethod("dominant")

@@ -1,3 +1,2 @@
 `recessive` <-
-function (o)  UseMethod("recessive")
-
+  function(o) UseMethod("recessive")

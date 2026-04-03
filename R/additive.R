@@ -1,3 +1,2 @@
 `additive` <-
-function (o) UseMethod("additive")
-
+  function(o) UseMethod("additive")

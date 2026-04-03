@@ -1,5 +1,5 @@
 Package: SNPassoc
-Version: 2.3.0
+Version: 2.3.0.9000
 Date: 2026-03-23
 Depends: R (>= 4.0.0)
 Imports: 
@@ -23,7 +23,10 @@ Authors@R: c( person(given = "Victor", family = "Moreno", role = "aut"),
               comment = c(ORCID = "0000-0003-3267-2146")),
               person(given = "Dolors", family = "Pelegri", 
               email = "dolors.pelegri@isglobal.org", role = c("aut", "cre"),
-              comment = c(ORCID = "0000-0002-5993-3003")))
+              comment = c(ORCID = "0000-0002-5993-3003")),
+              person(given = "Vitaly", family = "Korchagin", 
+              email = "vitaly_korchagin@rambler.ru", role = c("ctb"),
+              comment = c(ORCID = "0000-0003-2264-6294")))
 Description: Functions to perform most of the common analysis in genome 
     association studies are implemented. These analyses include descriptive 
     statistics and exploratory analysis of missing values, calculation of 

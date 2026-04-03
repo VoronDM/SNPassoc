@@ -11,9 +11,8 @@ Imports:
     ggplot2,
     poisbinom,
     rms,
-    methods,
-    lifecycle
-Suggests: testthat, knitr, rmarkdown, biomaRt,
+    methods
+Suggests: testthat, knitr, rmarkdown, biomaRt, lifecycle,
         VariantAnnotation, 
         GenomicRanges, IRanges, S4Vectors, org.Hs.eg.db,
         TxDb.Hsapiens.UCSC.hg19.knownGene

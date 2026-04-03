@@ -73,6 +73,7 @@
 # fax:      507-284-9542
 # email: schaid@mayo.edu
 # 
+#' @export
 haplo.em  <- function(geno, locus.label=NA, miss.val=c(0,NA), weight=NULL, 
                       control = haplo.em.control()  ){
 
@@ -81,32 +82,32 @@ n.loci <- ncol(geno)/2
 n.subject <- nrow(geno)
 subj.id <- 1:n.subject
 
-if(n.loci<2) stop("Must have at least 2 loci for haplotype estimation!")
+if (n.loci < 2) stop("Must have at least 2 loci for haplotype estimation!")
 
 # set up weight
-if(any(is.null(weight))){
+if (any(is.null(weight))){
   weight <- rep(1,n.subject)
 }
 
-if(any(weight<0)){
+if (any(weight<0)){
   stop("negative weights not allowed")
 }
 
-if(length(weight)!=n.subject){
+if (length(weight) != n.subject){
   stop("Length of weight != number of subjects (nrow of geno)")
 }
 
 # Create locus label if not included
-if(all(is.na(locus.label))) locus.label<- paste("loc-",1:n.loci,sep="")
+if (all(is.na(locus.label))) locus.label <- paste("loc-",1:n.loci,sep = "")
 
-if(length(locus.label)!=n.loci){
+if (length(locus.label) != n.loci) {
   stop("length of locus.label != n.loci")
 }
 
 
 ## recode geno to integer values, accounting for missing values
 ## replaced loci with setupGeno (JPS: 10/20/2011)
-temp.geno <- setupGeno(geno, miss.val=miss.val, locus.label=locus.label)
+temp.geno <- setupGeno(geno, miss.val = miss.val, locus.label = locus.label)
 
 
 # Compute the max number of pairs of haplotypes over all subjects
@@ -120,7 +121,7 @@ max.haps <- 2*sum(max.pairs)
     #             intMax = as.integer(0),
     #             PACKAGE="haplo.stats")$intMax
 
-if(max.haps > control$max.haps.limit) max.haps <- control$max.haps.limit
+if (max.haps > control$max.haps.limit) max.haps <- control$max.haps.limit
 
 # check whether to delete some rows - now defunct, but use 
 # dummy to not break code that uses this in returned list
@@ -133,21 +134,21 @@ geno.vec <- ifelse(is.na(geno.vec),0,geno.vec)
 allele.labels <- attr(temp.geno, "unique.alleles")
 
 
-if(length(allele.labels)!=n.loci)
+if (length(allele.labels) != n.loci)
   stop("Number of loci in alleles list != n.loci")
 
 n.alleles <- numeric(n.loci)
 a.freq <- vector("list",n.loci)
 
-for(i in 1:n.loci){
+for (i in 1:n.loci){
   n.alleles[i] <- length(allele.labels[[i]])
-  j <- (i-1)*2 + 1
-  p <- table(temp.geno[,c(j, (j+1))], exclude=NA)
+  j <- (i - 1) * 2 + 1
+  p <- table(temp.geno[,c(j, (j+1))], exclude = NA)
   p <- p/sum(p)
-  a.freq[[i]] <- list(p=p)
+  a.freq[[i]] <- list(p = p)
 }
 
-if(is.null(control$loci.insert.order)) {
+if (is.null(control$loci.insert.order)) {
   control$loci.insert.order <- 1:n.loci
 }
 
@@ -321,8 +322,8 @@ df.lr <-  df.LD - df.noLD
 
 
 obj <- list(
-  lnlike=tmp1$lnlike,
-  lnlike.noLD=lnlike.noLD,
+  lnlike = tmp1$lnlike,
+  lnlike.noLD = lnlike.noLD,
   lr = lr,
   df.lr = df.lr,
   hap.prob = tmp2$hap.prob,
@@ -337,8 +338,8 @@ obj <- list(
   haplotype = haplotype,
   nreps = table(indx.subj),
   rows.rem = rows.rem,
-  max.pairs=max.pairs,
-  control=control)
+  max.pairs = max.pairs,
+  control = control)
 
 
   class(obj) <- "haplo.em"

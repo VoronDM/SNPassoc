@@ -1,3 +1,4 @@
+#' @export
 `setupSNP` <-
   function(data, colSNPs, sort = FALSE, info, sep = "/", ...) {
     if (missing(data)) {

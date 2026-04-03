@@ -1,3 +1,4 @@
+#' @export
 `plotMissing` <-
   function(
     x, print.labels.SNPs = TRUE,

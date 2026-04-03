@@ -1,3 +1,4 @@
+#' @export
 `association` <-
   function(
     formula, data, model = c("all"), model.interaction = c("codominant"),

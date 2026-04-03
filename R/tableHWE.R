@@ -1,3 +1,4 @@
+#' @export
 `tableHWE` <-
   function(x, strata, ...) {
     if (!inherits(x, "setupSNP")) {

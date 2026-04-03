@@ -9,6 +9,8 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
 coverage](https://codecov.io/gh/VoronDM/SNPassoc/graph/badge.svg)](https://app.codecov.io/gh/VoronDM/SNPassoc)
+[![](https://img.shields.io/github/last-commit/VoronDM/SNPassoc.svg)](https://github.com/VoronDM/SNPassoc/commits/master)
+[![R-CMD-check](https://github.com/VoronDM/SNPassoc/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/VoronDM/SNPassoc/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 This package carries out most common analysis when performing whole
